@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+	<path>pod.ac</path>
+	
+	<animation>
+		<type>rotate</type>
+		<object-name>Flap</object-name>
+		<axis>
+			<object-name>FlapAxis</object-name>
+		</axis>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod-flap-pos-norm</property>
+		<factor>100</factor>
+	</animation>
+</PropertyList>

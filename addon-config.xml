@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PropertyList>
+	<addons>
+		<by-id>
+			<org.flightgear.addons.target-dropping>
+				<addon-devel>
+					<pod-flap-pos-norm type="double">0</pod-flap-pos-norm>
+				</addon-devel>
+			</org.flightgear.addons.target-dropping>
+		</by-id>
+	</addons>
+	<sim>
+		<model n="1">
+			<path>[addon=org.flightgear.addons.target-dropping]Models/pod.xml</path>
+		</model>
+	</sim>
+	<!--<input include="keyboard.xml"/>-->
+</PropertyList>
