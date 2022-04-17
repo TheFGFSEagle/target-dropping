@@ -2,20 +2,20 @@
 <PropertyList>
 	<pod>
 		<offsets>
-			<x-m>0.85</x-m>
+			<x-m>0</x-m>
 			<y-m>0</y-m>
-			<z-m>-0.73</z-m>
-			<scale-x>0.75</scale-x>
-			<scale-y>1.1</scale-y>
-			<scale-z>0.5</scale-z>
+			<z-m>-1</z-m>
+			<scale-x>2</scale-x>
+			<scale-y>2</scale-y>
+			<scale-z>2</scale-z>
 			<roll-deg>0</roll-deg>
-			<pitch-deg>1</pitch-deg>
+			<pitch-deg>0</pitch-deg>
 			<heading-deg>0</heading-deg>
 		</offsets>
 		<max-attach-distance-ft type="double">20</max-attach-distance-ft>
 		<max-attach-altitude-ft type="double">5</max-attach-altitude-ft>
 		<!-- which /gear/gear[n] nodes will be checked for being on ground, separated by spaces -->
-		<gear-wow-indexes type="string">0 1 2</gear-wow-indexes>
-		<weight-prop>/payload/weight[2]/weight-lbs</weight-prop>
+		<gear-wow-indexes type="string"></gear-wow-indexes>
+		<weight-prop>/payload/weight/weight-lbs</weight-prop>
 	</pod>
 </PropertyList>

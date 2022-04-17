@@ -14,13 +14,19 @@ var main = func(addon) {
 	io.load_nasal(addon.basePath ~ "/Nasal/targets.nas", "targetDropping");
 	io.load_nasal(addon.basePath ~ "/Nasal/item.nas", "targetDropping");
 	
-	var model = split(".xml", split("/", getprop("/sim/model/path"))[-1])[0];
-	if (model == "") {
-		logprint(LOG_WARN, "Target dropping: Your aircraft is not supported ! Falling back to Cessna P210N data.");
-	}
-	targetDropping.aircraft = model != "" ? model : "p210n";
+	#if (model == "") {
+	#	logprint(LOG_WARN, "Target dropping: Your aircraft is not supported ! Falling back to Cessna P210N data.");
+	#}
 	
-	io.read_properties(addon.basePath ~ "/data/pod-config/" ~ targetDropping.aircraft, targetDropping.addonNode);
+	io.read_properties(addon.basePath ~ "/data/pod-config/" ~ getprop("/sim/aircraft"), targetDropping.addonNode);
+	
+	targetDropping.checkTime = func {
+		hours = getprop("/sim/time/real/hour");
+		#if (hours < 20 or hours > 21) {
+		#	return 0;
+		#}
+		return 1;
+	};
 	
 	targetDropping.pod = targetDropping.Pod.new(targetDropping.addonNode);
 	targetDropping.pod.place();

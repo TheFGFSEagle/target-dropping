@@ -25,12 +25,19 @@
 				</binding>
 			</item>
 			<item>
+				<label>Refill pod</label>
+				<binding>
+					<command>nasal</command>
+					<script>targetDropping.pod.refill();</script>
+				</binding>
+			</item>
+			<item>
 				<label>Reload addon</label>
 				<binding>
 					<command>addon-reload</command>
 					<id>org.flightgear.addons.target-dropping</id>
 				</binding>
-			</item> 
+			</item>
 		</menu>
 	</menubar-items>
 </PropertyList>

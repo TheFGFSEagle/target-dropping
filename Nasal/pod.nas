@@ -11,6 +11,7 @@ var Pod = {
 			attached: 0,
 			onground: 1,
 			totalPoints: 0,
+			originalPos: geo.aircraft_position(),
 		};
 		
 		obj.updateTimer = maketimer(0, func { obj.update(); });
@@ -32,10 +33,15 @@ var Pod = {
 		obj.acPitchNode = props.globals.getNode("/orientation/pitch-deg");
 		obj.acRollNode = props.globals.getNode("/orientation/roll-deg");
 		
+		obj.weightNode = props.globals.getNode(obj.rootNode.getValue("weight-prop"), 1);
+		
 		obj.volume = obj.rootNode.getValue("offsets/scale-x") * 2 * obj.rootNode.getValue("offsets/scale-y") * obj.rootNode.getValue("offsets/scale-z") * 0.5;
 		# TODO: make property-configurable
 		obj.itemVolume = 0.02; 
 		obj.itemCountFull = obj.itemCount = obj.volume / obj.itemVolume;
+		# TODO: make property-configurable
+		obj.itemWeight = 0.25 * KG2LB;
+		obj.weightNode.setValue(0);
 		return obj;
 	},
 	
@@ -74,11 +80,16 @@ var Pod = {
 	},
 	
 	clicked: func {
+		if (!targetDropping.checkTime()) {
+			gui.popupTip("The competition has not started yet / ended already !");
+			return;
+		}
+		
 		if (me.model == nil) {
 			return;
 		}
 		
-		var acPos = geo.aircraft_position();
+		var acPos = me.pos = geo.aircraft_position();
 		
 		if (!me.attached) {
 			if (!me.onground) {
@@ -89,16 +100,19 @@ var Pod = {
 			# Pod is standing on the ground, ready to be attached to the aircraft
 			var distance = me.pos.distance_to(geo.aircraft_position()) * M2FT;
 			if (distance > me.rootNode.getValue("max-attach-distance-ft")) {
+				gui.popupTip("You are not close enough to the pod to attach it !");
 				return;
 			}
 			
 			var altDiff = abs(me.altNode.getValue() - acPos.alt() * M2FT);
 			if (altDiff > me.rootNode.getValue("max-attach-altitude-ft")) {
+				gui.popupTip("You are not low enough to to attach the pod !");
 				return;
 			}
 			
 			foreach (var i; split(" ", me.rootNode.getValue("gear-wow-indexes"))) {
 				if (!props.globals.getNode("/gear/gear[" ~ i ~ "]/wow").getBoolValue()) {
+					gui.popupTip("Cannot attach pod - you are not on the ground !");
 					return;
 				}
 			}
@@ -107,6 +121,7 @@ var Pod = {
 			
 			me.attached = 1;
 			me.onground = 0;
+			me.weightNode.setValue(me.itemWeight * me.itemCount);
 		} else {
 			# Pod is attached, detach it
 			me.updateTimer.stop();
@@ -130,7 +145,8 @@ var Pod = {
 			me.setOngroundTimer.restart(fallTime + 4);
 			interpolate(me.altNode, alt * M2FT, fallTime + 1);
 			interpolate(me.pitchNode, 0, fallTime + 1);
-			interpolate(me.rollNode, 0, fallTime + 1)
+			interpolate(me.rollNode, 0, fallTime + 1);
+			me.weightNode.setValue(0);
 		}
 	},
 	
@@ -144,7 +160,12 @@ var Pod = {
 	},
 	
 	dropItem: func {
-		if (props.globals.getNode("/position/altitude-agl-ft") < 10) {
+		if (!targetDropping.checkTime()) {
+			gui.popupTip("The competition has not started yet / ended already !");
+			return;
+		}
+		
+		if (props.globals.getValue("/position/altitude-agl-ft") < 10) {
 			gui.popupTip("Cannot drop items - you are too close to the ground !");
 			return;
 		}
@@ -174,6 +195,7 @@ var Pod = {
 		me.itemCount -= 1;
 		if (points > 0) {
 			gui.popupTip(sprintf("You hit the target ! Points: %f, items remaining: %d", points, me.itemCount));
+			targetDropping.targets.vector[nearestTargetIndex].del();
 			targetDropping.targets.pop(nearestTargetIndex);
 		} else {
 			gui.popupTip(sprintf("You missed the target ! Items remaining: %d", me.itemCount));
@@ -188,6 +210,28 @@ var Pod = {
 		var item = targetDropping.Item.new(itemNode);
 		item.drop();
 		me.items.append(item);
+		
+		me.weightNode.setValue(me.itemWeight * me.itemCount);
+	},
+	
+	refill: func {
+		if (!targetDropping.checkTime()) {
+			gui.popupTip("The competition has not started yet / ended already !");
+			return;
+		}
+		
+		if (me.attached) {
+			gui.popupTip("You must detach the pod to refill it !");
+			return;
+		}
+		
+		if (me.pos.distance_to(me.originalPos) > 200) {
+			gui.popupTip("You are too far away from your starting location to refill the pod !");
+			return;
+		}
+		
+		me.itemCount = me.itemCountFull;
+		me.weightNode.setValue(me.itemWeight * me.itemCount);
 	},
 	
 	del: func {
@@ -195,6 +239,7 @@ var Pod = {
 			me.model.removeChildren();
 			me.model.remove();
 		}
+		me.weightNode.setValue(0);
 		foreach (var item; me.items.vector) {
 			item.del();
 		}

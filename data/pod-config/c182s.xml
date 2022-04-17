@@ -5,11 +5,11 @@
 			<x-m>0.85</x-m>
 			<y-m>0</y-m>
 			<z-m>-0.73</z-m>
-			<scale-x>0.75</scale-x>
+			<scale-x>1</scale-x>
 			<scale-y>1.1</scale-y>
 			<scale-z>0.5</scale-z>
 			<roll-deg>0</roll-deg>
-			<pitch-deg>1</pitch-deg>
+			<pitch-deg>-5</pitch-deg>
 			<heading-deg>0</heading-deg>
 		</offsets>
 		<max-attach-distance-ft type="double">20</max-attach-distance-ft>

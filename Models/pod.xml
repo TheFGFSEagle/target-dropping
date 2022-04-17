@@ -140,6 +140,7 @@
 		<object-name>Chute</object-name>
 		<object-name>ChuteWires</object-name>
 		<object-name>PodWires</object-name>
+		<object-name>Pod</object-name>
 		<enable-hot type="bool">false</enable-hot>
 	</animation>
 </PropertyList>
