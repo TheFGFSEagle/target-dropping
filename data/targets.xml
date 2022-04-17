@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+	<target>
+		<latitude-deg>37.367</latitude-deg>
+		<longitude-deg>-78.082</longitude-deg>
+		<radius-m>100</radius-m>
+	</target>
+	<target>
+		<latitude-deg>37.36</latitude-deg>
+		<longitude-deg>-78.08</longitude-deg>
+		<radius-m>100</radius-m>
+	</target>
+	<target>
+		<latitude-deg>37.3</latitude-deg>
+		<longitude-deg>-78.1</longitude-deg>
+		<radius-m>100</radius-m>
+	</target>
+	<target>
+		<latitude-deg>37.4</latitude-deg>
+		<longitude-deg>-78.</longitude-deg>
+		<radius-m>100</radius-m>
+	</target>
+	<target>
+		<latitude-deg>37.45</latitude-deg>
+		<longitude-deg>-78.14</longitude-deg>
+		<radius-m>100</radius-m>
+	</target>
+	<target>
+		<latitude-deg>37.35</latitude-deg>
+		<longitude-deg>-78.02</longitude-deg>
+		<radius-m>100</radius-m>
+	</target>
+</PropertyList>

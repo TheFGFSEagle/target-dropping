@@ -7,9 +7,23 @@
 
 	<menubar-items>
 		<menu>
-			<label>Cargo Towing</label>
+			<label>Target dropping</label>
 			<enabled type="bool">true</enabled>
 			
+			<item>
+				<label>Place pod in front of aircraft</label>
+				<binding>
+					<command>nasal</command>
+					<script>targetDropping.pod.place();</script>
+				</binding>
+			</item>
+			<item>
+				<label>Attach / detach pod</label>
+				<binding>
+					<command>nasal</command>
+					<script>targetDropping.pod.clicked();</script>
+				</binding>
+			</item>
 			<item>
 				<label>Reload addon</label>
 				<binding>

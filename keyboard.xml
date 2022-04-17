@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PropertyList>
+	<keyboard>
+		<key n="100">
+			<name>Alt-d</name>
+			<desc>Drop one item</desc>
+			<mod-alt>
+				<binding>
+					<command>nasal</command>
+					<script>targetDropping.pod.dropItem();</script>
+				</binding>
+			</mod-alt>
+		</key>
+	</keyboard>
+</PropertyList>

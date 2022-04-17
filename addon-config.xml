@@ -4,15 +4,18 @@
 		<by-id>
 			<org.flightgear.addons.target-dropping>
 				<addon-devel>
-					<pod-flap-pos-norm type="double">0</pod-flap-pos-norm>
+					<pod>
+						<flap-pos-norm type="double">0</flap-pos-norm>
+						<latitude-deg type="double">0</latitude-deg>
+						<longitude-deg type="double">0</longitude-deg>
+						<altitude-ft type="double">0</altitude-ft>
+						<heading-deg type="double">0</heading-deg>
+						<pitch-deg type="double">0</pitch-deg>
+						<roll-deg type="double">0</roll-deg>
+					</pod>
 				</addon-devel>
 			</org.flightgear.addons.target-dropping>
 		</by-id>
 	</addons>
-	<sim>
-		<model n="1">
-			<path>[addon=org.flightgear.addons.target-dropping]Models/pod.xml</path>
-		</model>
-	</sim>
-	<!--<input include="keyboard.xml"/>-->
+	<input include="keyboard.xml"/>
 </PropertyList>

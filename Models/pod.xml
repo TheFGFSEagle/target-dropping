@@ -3,12 +3,143 @@
 	<path>pod.ac</path>
 	
 	<animation>
+		<type>scale</type>
+		<object-name>Pod</object-name>
+		<object-name>Flap</object-name>
+		<object-name>PodWires</object-name>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/offsets/scale-x</property>
+		<y-min>1</y-min>
+		<y-max>1</y-max>
+		<z-min>1</z-min>
+		<z-max>1</z-max>
+	</animation>
+	<animation>
+		<type>scale</type>
+		<object-name>Pod</object-name>
+		<object-name>Flap</object-name>
+		<object-name>PodWires</object-name>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/offsets/scale-y</property>
+		<x-min>1</x-min>
+		<x-max>1</x-max>
+		<z-min>1</z-min>
+		<z-max>1</z-max>
+	</animation>
+	<animation>
+		<type>scale</type>
+		<object-name>Pod</object-name>
+		<object-name>Flap</object-name>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/offsets/scale-z</property>
+		<x-min>1</x-min>
+		<x-max>1</x-max>
+		<y-min>1</y-min>
+		<y-max>1</y-max>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<axis>
+			<x>1</x>
+		</axis>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/offsets/roll-deg</property>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<axis>
+			<y>1</y>
+		</axis>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/offsets/pitch-deg</property>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<axis>
+			<z>1</z>
+		</axis>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/offsets/heading-deg</property>
+	</animation>
+	<animation>
+		<type>translate</type>
+		<axis>
+			<x>1</x>
+		</axis>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/offsets/x-m</property>
+	</animation>
+	<animation>
+		<type>translate</type>
+		<axis>
+			<y>1</y>
+		</axis>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/offsets/y-m</property>
+	</animation>
+	<animation>
+		<type>translate</type>
+		<axis>
+			<z>1</z>
+		</axis>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/offsets/z-m</property>
+	</animation>
+	
+	<animation>
 		<type>rotate</type>
 		<object-name>Flap</object-name>
 		<axis>
 			<object-name>FlapAxis</object-name>
 		</axis>
-		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod-flap-pos-norm</property>
-		<factor>100</factor>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/flap-pos-norm</property>
+		<factor>-100</factor>
+	</animation>
+	
+	<animation>
+		<type>knob</type>
+		<object-name>Pod</object-name>
+		<object-name>Flap</object-name>
+		<action>
+			<binding>
+				<command>nasal</command>
+				<script>targetDropping.pod.clicked();</script>
+			</binding>
+		</action>
+	</animation>
+	
+	<animation>
+		<type>select</type>
+		<object-name>Chute</object-name>
+		<object-name>ChuteWires</object-name>
+		<object-name>PodWires</object-name>
+		<condition>
+			<greater-than>
+				<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/parachute-deploy</property>
+				<value>0</value>
+			</greater-than>
+		</condition>
+	</animation>
+	<animation>
+		<type>scale</type>
+		<object-name>Chute</object-name>
+		<object-name>ChuteWires</object-name>
+		<object-name>PodWires</object-name>
+		<center>
+			<x-m>0</x-m>
+			<y-m>0</y-m>
+			<z-m>0.25</z-m>
+		</center>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/parachute-deploy</property>
+		<x-min>1</x-min>
+		<x-max>1</x-max>
+		<y-min>1</y-min>
+		<y-max>1</y-max>
+	</animation>
+	<animation>
+		<type>scale</type>
+		<object-name>Chute</object-name>
+		<object-name>ChuteWires</object-name>
+		<property>/addons/by-id/org.flightgear.addons.target-dropping/addon-devel/pod/parachute-pos-norm</property>
+		<z-min>1</z-min>
+		<z-max>1</z-max>
+	</animation>
+	
+	<animation>
+		<object-name>Chute</object-name>
+		<object-name>ChuteWires</object-name>
+		<object-name>PodWires</object-name>
+		<enable-hot type="bool">false</enable-hot>
 	</animation>
 </PropertyList>
