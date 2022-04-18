@@ -14,10 +14,6 @@ var main = func(addon) {
 	io.load_nasal(addon.basePath ~ "/Nasal/targets.nas", "targetDropping");
 	io.load_nasal(addon.basePath ~ "/Nasal/item.nas", "targetDropping");
 	
-	#if (model == "") {
-	#	logprint(LOG_WARN, "Target dropping: Your aircraft is not supported ! Falling back to Cessna P210N data.");
-	#}
-	
 	io.read_properties(addon.basePath ~ "/data/pod-config/" ~ getprop("/sim/aircraft"), targetDropping.addonNode);
 	
 	targetDropping.checkTime = func {

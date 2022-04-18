@@ -6,8 +6,9 @@ var Target = {
 			parents: [Target],
 			pos: geo.Coord.new().set_latlon(lat, lon, geo.elevation(lat, lon)),
 			radius: radius,
-			model: geo.put_model(targetDropping.basePath ~ "/Models/target.ac", lat, lon),
 		};
+		
+		obj.model = call(geo.put_model, [targetDropping.basePath ~ "/Models/target.ac", lat, lon]);
 		
 		return obj;
 	},
