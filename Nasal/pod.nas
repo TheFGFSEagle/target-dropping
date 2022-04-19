@@ -61,7 +61,7 @@ var Pod = {
 		me.pos = geo.aircraft_position().apply_course_distance(me.acHeadingNode.getValue(), 10);
 		me.latNode.setValue(me.pos.lat());
 		me.lonNode.setValue(me.pos.lon());
-		me.altNode.setValue((geo.elevation(me.pos.lat(), me.pos.lon()) - me.rootNode.getValue("offsets/z-m") + me.rootNode.getValue("offsets/scale-z") * 0.5) * M2FT);
+		me.altNode.setValue((geo.elevation(me.pos.lat(), me.pos.lon()) - me.rootNode.getValue("offsets/z-m") + me.rootNode.getValue("offsets/scale-z") * 0.5 / 2) * M2FT);
 		me.headingNode.setValue(me.acHeadingNode.getValue());
 		me.pitchNode.setValue(me.acPitchNode.getValue());
 		me.rollNode.setValue(me.acRollNode.getValue());
@@ -134,7 +134,7 @@ var Pod = {
 			me.rollNode.setValue(me.acRollNode.getValue());
 			me.attached = 0;
 
-			var alt = geo.elevation(acPos.lat(), acPos.lon());
+			var alt = geo.elevation(acPos.lat(), acPos.lon()) - me.rootNode.getValue("offsets/z-m") + me.rootNode.getValue("offsets/scale-z") * 0.5 / 2;
 			var fallTime = (acPos.alt() - alt) / 5;
 			if (props.globals.getValue("/position/altitude-agl-ft") < 10) {
 				fallTime = (acPos.alt() - alt) / 25;

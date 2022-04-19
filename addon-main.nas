@@ -33,12 +33,14 @@ var main = func(addon) {
 		targetDropping.removeTargets();
 		targetDropping.createTargets(addon.basePath ~ "/data/targets.xml");
 	});
+	targetDropping.createTargetsTimer.singleShot = 1;
+	targetDropping.createTargetsTimer.simulatedTime = 0;
 	
 	if (sceneryLoadedNode.getBoolValue()) {
 		targetDropping.createTargetsTimer.start();
 	} 
 	setlistener(sceneryLoadedNode, func {
-		if (sceneryLoadedNode.getBoolValue()) {
+		if (sceneryLoadedNode.getBoolValue() and !targetDropping.createTargetsTimer.isRunning) {
 			targetDropping.createTargetsTimer.start();
 		} 
 	});
