@@ -226,19 +226,22 @@ var Pod = {
 		}
 		
 		var airports = [airportinfo("87W")];
-		var distances = []
-		for airport in airports:
+		var distances = [];
+		foreach (var airport; airports) {
 			append(distances, me.pos.distance_to(geo.Coord.new().set_latlon(airport.lat, airport.lon)));
+		}
 		
 		if (math.min(distances) > 200) {
 			gui.popupTip("Cannot refill pod - you are too far away from the airport !");
 			return;
 		}
 		
-		foreach (var i; split(" ", me.rootNode.getValue("gear-wow-indexes"))) {
-			if (!props.globals.getNode("/gear/gear[" ~ i ~ "]/wow").getBoolValue()) {
-				gui.popupTip("Cannot refill pod - you are not on the ground !");
-				return;
+		if (!(me.rootNode.getValue("gear-wow-indexes") == "")) {
+			foreach (var i; split(" ", me.rootNode.getValue("gear-wow-indexes"))) {
+				if (!props.globals.getNode("/gear/gear[" ~ i ~ "]/wow").getBoolValue()) {
+					gui.popupTip("Cannot refill pod - you are not on the ground !");
+					return;
+				}
 			}
 		}
 		
