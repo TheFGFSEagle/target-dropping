@@ -27,7 +27,21 @@ var main = func(addon) {
 	targetDropping.pod = targetDropping.Pod.new(targetDropping.addonNode);
 	targetDropping.pod.place();
 	
-	targetDropping.createTargets(addon.basePath ~ "/data/targets.xml");
+	var sceneryLoadedNode = props.globals.getNode("/sim/sceneryloaded");
+	
+	targetDropping.createTargetsTimer = maketimer(15, func {
+		targetDropping.removeTargets();
+		targetDropping.createTargets(addon.basePath ~ "/data/targets.xml");
+	});
+	
+	if (sceneryLoadedNode.getBoolValue()) {
+		targetDropping.createTargetsTimer.start();
+	} 
+	setlistener(sceneryLoadedNode, func {
+		if (sceneryLoadedNode.getBoolValue()) {
+			targetDropping.createTargetsTimer.start();
+		} 
+	});
 	
 #	setlistener("/sim/signals/click", func {
 #		if (__kbd.shift.getBoolValue()) {
@@ -46,6 +60,8 @@ var main = func(addon) {
 
 var unload = func(addon) {
 	logprint(LOG_DEBUG, "Unloading target-dropping addon");
+	
+	targetDropping.createTargetsTimer.stop();
 	
 	call(targetDropping.removeTargets, nil, targetDropping);
 	call(targetDropping.pod.del, nil, targetDropping.pod);

@@ -225,10 +225,11 @@ var Pod = {
 			return;
 		}
 		
-		var airports = [airportinfo("87W")];
+		var airports = ["87W", "KFVX", "VA34", "05VA", "W81"];
 		var distances = [];
 		foreach (var airport; airports) {
-			append(distances, me.pos.distance_to(geo.Coord.new().set_latlon(airport.lat, airport.lon)));
+			var info = airportinfo(airport);
+			append(distances, me.pos.distance_to(geo.Coord.new().set_latlon(info.lat, info.lon)));
 		}
 		
 		if (math.min(distances) > 200) {

@@ -8,7 +8,7 @@ var Target = {
 			radius: radius,
 		};
 		
-		obj.model = call(geo.put_model, [targetDropping.basePath ~ "/Models/target.ac", lat, lon]);
+		obj.model = geo.put_model(targetDropping.basePath ~ "/Models/target.ac", lat, lon);
 		
 		return obj;
 	},
