@@ -232,7 +232,7 @@ var Pod = {
 			append(distances, me.pos.distance_to(geo.Coord.new().set_latlon(info.lat, info.lon)));
 		}
 		
-		if (math.min(distances) > 200) {
+		if (call(math.min, distances) > 200) {
 			gui.popupTip("Cannot refill pod - you are too far away from the airport !");
 			return;
 		}
