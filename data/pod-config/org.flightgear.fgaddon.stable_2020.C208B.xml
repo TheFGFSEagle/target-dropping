@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+	<pod>
+		<offsets>
+			<x-m>4.3</x-m>
+			<y-m>-0</y-m>
+			<z-m>-1</z-m>
+			<scale-x>1.5</scale-x>
+			<scale-y>1.4</scale-y>
+			<scale-z>1</scale-z>
+			<roll-deg>0</roll-deg>
+			<pitch-deg>1.5</pitch-deg>
+			<heading-deg>0</heading-deg>
+		</offsets>
+		<max-attach-distance-ft type="double">50</max-attach-distance-ft>
+		<max-attach-altitude-ft type="double">10</max-attach-altitude-ft>
+		<!-- which /gear/gear[n] nodes will be checked for being on ground, separated by spaces -->
+		<gear-wow-indexes type="string">0 1 2</gear-wow-indexes>
+		<weight-prop>/payload/weight[3]/weight-lb</weight-prop>
+	</pod>
+</PropertyList>
